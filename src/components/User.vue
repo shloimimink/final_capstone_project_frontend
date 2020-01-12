@@ -1,39 +1,60 @@
 <template>
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <h4>{{user.name}}</h4>
-                <p>{{user.email}}</p>
-                <p>{{user.phone}}</p>
-                <p>{{user.profile_picture}}</p>
-                <p>{{user.location}}</p>
-                <p>{{user.seat_preference}}</p>
-                <p>{{user.class_preference}}</p>
-                <p>{{user.airport_preference}}</p>
-                <h4>Favorites</h4>
-                <div v-for="favorite in user.favorites">
-                    Airplane: {{ favorite.airplane_model}}
-                    <router-link v-bind:to="`/favorites/${favorite.id}`">More Info</router-link>
-                    <button v-on:click="deleteFavorite(favorite)">Delete</button>
+    <div class="signup">
+        <!-- Masthead -->
+        <header class="masthead signup">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center justify-content-center text-center">
+                    <div class="col-lg-10 align-self-end">
+                        <h1 class="text-uppercase text-white font-weight-bold">{{ message }}</h1>
+                        <hr class="divider my-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>{{user.name}}</h4>
+                                <p>{{user.email}}</p>
+                                <p>{{user.phone}}</p>
+                                <p>{{user.profile_picture}}</p>
+                                <p>{{user.location}}</p>
+                                <p>{{user.seat_preference}}</p>
+                                <p>{{user.class_preference}}</p>
+                                <p>{{user.airport_preference}}</p>
+                                <h4>Favorites</h4>
+                                <div v-for="favorite in user.favorites">
+                                    Airplane: {{ favorite.airplane_model}}
+                                    <router-link v-bind:to="`/favorites/${favorite.id}`">More Info</router-link>
+                                    <button v-on:click="deleteFavorite(favorite)">Delete</button>
+                                </div>
+                                <div v-if="user.is_current_user">
+                                    <router-link v-bind:to="`/users/${user.id}/edit`">Edit user</router-link>
+                                    <h2>Add a favorite (show all airplanes in a dropdown)</h2>
+                                    <select v-model="selectedAirplaneId">
+                                        <option v-for="airplane in airplanes"
+                                                v-if="!user.favorite_ids.includes(airplane.id)"
+                                                v-bind:value="airplane.id">
+                                            {{ airplane.model }}
+                                        </option>
+                                    </select>
+                                    <span>Selected airplane id: {{ selectedAirplaneId }}</span>
+                                    <button v-on:click="addFavorite()">Submit</button>
+                                </div>
+                                <br>
+                                <router-link to="/users">Back to all users</router-link>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 align-self-baseline">
+
+                    </div>
                 </div>
-                <div v-if="user.is_current_user">
-                    <router-link v-bind:to="`/users/${user.id}/edit`">Edit user</router-link>
-                    <h2>Add a favorite (show all airplanes in a dropdown)</h2>
-                    <select v-model="selectedAirplaneId">
-                        <option v-for="airplane in airplanes" v-if="!user.favorite_ids.includes(airplane.id)"
-                                v-bind:value="airplane.id">
-                            {{ airplane.model }}
-                        </option>
-                    </select>
-                    <span>Selected airplane id: {{ selectedAirplaneId }}</span>
-                    <button v-on:click="addFavorite()">Submit</button>
-                </div>
-                <br>
-                <router-link to="/users">Back to all users</router-link>
             </div>
-        </div>
+        </header>
     </div>
 </template>
+
+<style>
+    header.masthead-login {
+        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/1.jpg");
+    }
+</style>
 
 <script>
     import axios from "axios";
@@ -92,7 +113,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

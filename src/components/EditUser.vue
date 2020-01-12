@@ -1,28 +1,51 @@
 <template>
-    <div class="container">
-        <h3>Edit User</h3>
-        <form v-on:submit.prevent="updateUser(user)">
-            <ul>
-                <li v-for="error in errors">{{error}}</li>
-            </ul>
-            Name:
-            <input type="text" class="form-control" v-model="user.name">
-            Phone Number:
-            <input type="text" class="form-control" v-model="user.phone">
-            Profile picture:
-            <input type="text" class="form-control" v-model="user.profile_picture">
-            Location:
-            <input type="text" class="form-control" v-model="user.location">
-            Seat Preference:
-            <input type="text" class="form-control" v-model="user.seat_preference">
-            Class Preference:
-            <input type="text" class="form-control" v-model="user.class_preference">
-            airport Preference:
-            <input type="text" class="form-control" v-model="user.airport_preference">
-            <input type="submit" value="Update"/>
-        </form>
+    <div class="signup">
+        <!-- Masthead -->
+        <header class="masthead signup">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center justify-content-center text-center">
+                    <div class="col-lg-10 align-self-end">
+                        <h1 class="text-uppercase text-white font-weight-bold">{{ message }}</h1>
+                        <hr class="divider my-4">
+                        <div class="container">
+                            <h3>Edit User</h3>
+                            <form v-on:submit.prevent="updateUser(user)">
+                                <ul>
+                                    <li v-for="error in errors">{{error}}</li>
+                                </ul>
+                                Name:
+                                <input type="text" class="form-control" v-model="user.name">
+                                Phone Number:
+                                <input type="text" class="form-control" v-model="user.phone">
+                                Profile picture:
+                                <input type="text" class="form-control" v-model="user.profile_picture">
+                                Location:
+                                <input type="text" class="form-control" v-model="user.location">
+                                Seat Preference:
+                                <input type="text" class="form-control" v-model="user.seat_preference">
+                                Class Preference:
+                                <input type="text" class="form-control" v-model="user.class_preference">
+                                airport Preference:
+                                <input type="text" class="form-control" v-model="user.airport_preference">
+                                <input type="submit" value="Update"/>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 align-self-baseline">
+
+                    </div>
+                </div>
+            </div>
+        </header>
     </div>
 </template>
+
+<style>
+    header.masthead-login {
+        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/1.jpg");
+    }
+</style>
+
 
 <script>
     import axios from "axios"
@@ -67,7 +90,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>
