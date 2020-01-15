@@ -7,8 +7,10 @@ import Logout from "../components/Logout.vue";
 import Airlines from "../components/Airlines.vue";
 import EditUser from "../components/EditUser.vue";
 import AllUsers from "../components/AllUsers.vue";
-import User from "../components/User.vue";
+import UserProfileShow from "../components/UserProfileShow.vue";
 import AirplaneUser from "../components/AirplaneUser.vue";
+import ShowPosts from "../components/ShowPosts.vue";
+import UserAirplaneShow from "../components/UserAirplaneShow.vue";
 
 
 Vue.use(VueRouter);
@@ -22,9 +24,10 @@ const routes = [
     {path: "/airlines", name: "airlines-index", component: Airlines},
     {path: "/users/:id/edit", name: "users-edit", component: EditUser},
     {path: "/users", name: "users-index", component: AllUsers},
-    {path: "/users/:id", name: "users-show", component: User},
-    {path: "/favorites/:id", name: "favorites-show", component: AirplaneUser}
-
+    {path: "/users-profile/:id", name: "users-profile-show", component: UserProfileShow},
+    {path: "/favorites/:id", name: "favorites-show", component: AirplaneUser},
+    {path: "/posts/:id", name: "posts-show", component: ShowPosts},
+    {path: "/users-airplane/:id", name: "users-airplane-show", component: UserAirplaneShow}
 ];
 
 const router = new VueRouter({

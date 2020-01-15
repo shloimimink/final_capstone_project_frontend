@@ -9,7 +9,7 @@
                     </div>
                     <div class="">
                         <div class="card-body">
-                            <div v-for="user in users" class="card">
+                            <div class="card">
                                 <div class="row">
                                     <div class="col col-sm-4 left">
                                         <div class="img animated fadeIn">
@@ -18,7 +18,7 @@
                                         </div>
                                         <h4>{{user.name}}</h4>
                                         <p>Role: Admin</p>
-                                        <button v-on:click="showMoreInfo(user)">More Info</button>
+                                        <button v-on:click="showMoreInfo()">More Info</button>
                                     </div>
                                     <div class="col col-sm-8 right">
                                         <div class="container">
@@ -48,17 +48,12 @@
 </template>
 
 <style>
-    body {
-        background-color: #6a5f5e;
-    }
-
     header.masthead-login {
         background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/1.jpg");
     }
 
     .img-logo {
         border-radius: 50%;
-        width: 100px;
     }
 
     @import url('https://fonts.googleapis.com/css?family=Poppins');
@@ -98,8 +93,7 @@
         border-radius: .25rem;
         border: none;
         width: 600px;
-        height: 300px;
-        margin-bottom: 3rem;
+        height: 300px
     }
 
     .card-body {
@@ -219,24 +213,28 @@
     export default {
         data: function () {
             return {
-                message: "All Users",
-                users: []
+                message: "Profile",
+                user: {}
             };
         },
 
         created: async function () {
-            const response = await axios.get("/api/users");
-            const users = response.data;
-            this.users = response.data;
-            console.log("all users", users)
+            //get users profile
+
+            try {
+                const response = await axios.get("/api/users/" + this.$route.params.id);
+                const users = response.data;
+                this.user = response.data;
+                console.log("user", users)
+            } catch (error) {
+                console.log(error.response);
+            }
         },
 
         methods: {
-
-            showMoreInfo: function (user) {
-                this.$router.push("/users-airplane/" + user.id)
+            showMoreInfo: function () {
+                this.$router.push("/users-airplane/" + this.$route.params.id)
             }
         }
-
     }
 </script>

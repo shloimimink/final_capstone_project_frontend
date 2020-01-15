@@ -5,7 +5,7 @@
             <div class="container h-100">
                 <div class="row h-100 align-items-center justify-content-center text-center">
                     <div class="col-lg-10 align-self-end">
-                        <h1 class="text-uppercase text-white font-weight-bold">{{ message }}</h1>
+                        <h1 class="text-uppercase text-white font-weight-bold"></h1>
                         <hr class="divider my-4">
 
 
@@ -49,8 +49,8 @@
     export default {
         data: function () {
             return {
-                email: "",
-                password: "",
+                email: "shloimi@email.com",
+                password: "password",
                 errors: []
             };
         },
@@ -67,7 +67,7 @@
                     axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.jwt;
                     localStorage.setItem("jwt", response.data.jwt);
                     this.$emit("theJwtChanged");
-                    this.$router.push("/users/" + response.data.user_id);
+                    this.$router.push("/users-profile/" + response.data.user_id);
                     console.log("login success", session)
 
                 } catch (error) {

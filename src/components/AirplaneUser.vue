@@ -38,7 +38,7 @@
                 <form v-on:submit.prevent="submitPost()">
                     <div class="form-group">
                         <label>post:</label>
-                        <input type="text" class="form-control" v-model="post">
+                        <input type="text" class="form-control" v-model="postText">
                     </div>
                     <input type="submit" class="btn btn-primary" value="Submit">
                 </form>
@@ -49,7 +49,8 @@
             <div class="container">
                 <h2>Posts</h2>
                 <div v-for="post in favorite.posts">
-                    {{ post }}
+                    <!--show the post text-->
+                    <a v-bind:href="`/posts/${post.id}`">{{ post.text }}</a>
                 </div>
             </div>
         </section>
@@ -105,7 +106,8 @@
             return {
                 message: "Hello",
                 favorite: {airplane: {}},
-                articles: []
+                articles: [],
+                postText: ""
             };
         },
         created: async function () {
@@ -141,10 +143,6 @@
                 } catch (error) {
                     console.log(error.response)
                 }
-
-                const response2 = await axios.post("/api/posts");
-                const postComment = response2.data;
-
             },
 
             deletePhoto: async function (image) {
@@ -154,9 +152,18 @@
                 this.favorite.images.splice(index, 1);
                 console.log("image deleted", imageDeleted)
             },
-            submitPost: function () {
 
-            }
+            submitPost: async function () {
+                const params = {
+                    text: this.postText,
+                    airplane_id: this.favorite.airplane_id
+                };
+
+                const response = await axios.post("/api/posts", params);
+                const newpost = response.data;
+                this.favorite.posts.push(newpost);
+                console.log("post added", newpost)
+            },
         }
     };
 

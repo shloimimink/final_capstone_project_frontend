@@ -3,7 +3,7 @@
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">The Airplane Connector</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -16,7 +16,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <router-link class="nav-link js-scroll-trigger" to="/about">About</router-link>
+                            <router-link class="nav-link js-scroll-trigger" to="/about">Book a Flight</router-link>
                         </li>
 
                         <li class="nav-item">
@@ -41,11 +41,11 @@
         </nav>
         <router-view v-on:theJwtChanged="updateJwt()"/>
         <!-- Footer -->
-        <footer class="bg-light py-5">
-            <div class="container">
-                <div class="small text-center text-muted">Copyright &copy; 2020 - Airplane Connector</div>
-            </div>
-        </footer>
+        <!--<footer class="bg-light py-5">-->
+        <!--<div class="container">-->
+        <!--<div class="small text-center text-muted">Copyright &copy; 2020 - Airplane Connector</div>-->
+        <!--</div>-->
+        <!--</footer>-->
     </div>
 </template>
 

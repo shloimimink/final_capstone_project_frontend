@@ -1,23 +1,23 @@
 <template>
-    <div class="signup">
-        <!-- Masthead -->
-        <header class="masthead signup">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center justify-content-center text-center">
-                    <div class="col-lg-10 align-self-end">
-                        <h1 class="text-uppercase text-white font-weight-bold">{{ message }}</h1>
-                        <hr class="divider my-4">
-                        <div class="card">
+    <!-- Masthead -->
+    <header class="masthead signup">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center text-center">
+                <div class="col-lg-10 align-self-end">
+                    <h1 class="text-uppercase text-white font-weight-bold"></h1>
+                    <hr class="divider my-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Favorites and Profile</h2>
+                        </div>
+                        <div class="">
                             <div class="card-body">
-                                <h4>{{user.name}}</h4>
-                                <p>{{user.email}}</p>
-                                <p>{{user.phone}}</p>
-                                <p>{{user.profile_picture}}</p>
-                                <p>{{user.location}}</p>
+                                Seat Preference:
                                 <p>{{user.seat_preference}}</p>
+                                Class Preference:
                                 <p>{{user.class_preference}}</p>
+                                Airport Preference:
                                 <p>{{user.airport_preference}}</p>
-                                <h4>Favorites</h4>
                                 <div v-for="favorite in user.favorites">
                                     Airplane: {{ favorite.airplane_model}}
                                     <router-link v-bind:to="`/favorites/${favorite.id}`">More Info</router-link>
@@ -25,7 +25,7 @@
                                 </div>
                                 <div v-if="user.is_current_user">
                                     <router-link v-bind:to="`/users/${user.id}/edit`">Edit user</router-link>
-                                    <h2>Add a favorite (show all airplanes in a dropdown)</h2>
+                                    <h2>Add a favorite</h2>
                                     <select v-model="selectedAirplaneId">
                                         <option v-for="airplane in airplanes"
                                                 v-if="!user.favorite_ids.includes(airplane.id)"
@@ -41,13 +41,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8 align-self-baseline">
+                </div>
+                <div class="col-lg-8 align-self-baseline">
 
-                    </div>
                 </div>
             </div>
-        </header>
-    </div>
+        </div>
+    </header>
 </template>
 
 <style>
@@ -70,15 +70,7 @@
 
         created: async function () {
 
-            try {
-                const response = await axios.get("/api/users/" + this.$route.params.id);
-                const users = response.data;
-                this.user = response.data;
-                console.log("user", users)
-            } catch (error) {
-                console.log(error.response);
-            }
-
+            // getting all Airplanes
             try {
                 const response = await axios.get("/api/airplanes/");
                 const airplanes = response.data;
@@ -87,9 +79,15 @@
             } catch (error) {
                 console.log(error.response);
             }
+
+            const response = await axios.get("/api/users/" + this.$route.params.id);
+            this.user = response.data;
         },
 
+
         methods: {
+
+            //add a favorite
             addFavorite: async function () {
                 const params = {
                     airplane_id: this.selectedAirplaneId
@@ -102,7 +100,7 @@
                 this.selectedAirplaneId = null;
                 console.log("airplane added", favorite)
             },
-
+            //delete a favorite
             deleteFavorite: async function (favorite) {
                 const response = await axios.delete("/api/airplane_users/" + favorite.id);
                 const favoritesUser = response.data;
@@ -111,5 +109,6 @@
                 console.log("favorite deleted", favoritesUser)
             }
         }
+
     }
 </script>
