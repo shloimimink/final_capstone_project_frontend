@@ -74,7 +74,8 @@
                     location: user.location,
                     seat_preference: user.seat_preference,
                     class_preference: user.class_preference,
-                    airport_preference: user.airport_preference
+                    airport_preference: user.airport_preference,
+                    //airline_Preference: user.airline_Preference
                 };
 
                 try {
