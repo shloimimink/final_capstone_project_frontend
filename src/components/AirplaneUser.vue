@@ -1,46 +1,32 @@
 <template>
     <div class="signup">
-
-
-        <!-- Masthead -->
-        <header class="masthead signup">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center justify-content-center text-center">
-                    <div class="col-lg-10 align-self-end">
-                        <h1 class="text-uppercase text-white font-weight-bold">{{ favorite.airplane.model }}</h1>
-                        <hr class="divider my-4">
-                        <!--<div class="container">-->
-                        <!--<h3>{{favorite.airplane.model}}</h3>-->
-                        <!--<div v-for="image in favorite.images">-->
-                        <!--<img v-bind:src="image.url" alt="" width="300">-->
-                        <!--<button v-on:click="deletePhoto(image)">Delete image</button>-->
-                        <!--</div>-->
-                        <!--<form v-on:submit.prevent="submit()">-->
-                        <!--<h2>Create a new image:</h2>-->
-                        <!--<div>-->
-                        <!--Image: <input type="file" v-on:change="setFile($event)" ref="fileInput">-->
-                        <!--</div>-->
-                        <!--<input type="submit" value="Submit">-->
-                        <!--</form>-->
-
-
-                        <!--<router-link :to="`/users/${favorite.user_id}`">Back to profile</router-link>-->
-                        <!--</div>-->
-                    </div>
-                    <div class="col-lg-8 align-self-baseline"></div>
-                </div>
+        <button v-on:click="deletePhoto(image)">Delete image</button>
+        <form v-on:submit.prevent="submit()">
+            <h2>Create a new image:</h2>
+            <div>
+                Image: <input type="file" v-on:change="setFile($event)" ref="fileInput">
             </div>
-        </header>
-        <section>
-            <div class="container">
-                <div class="row">
-                    <div v-for="image in favorite.images" class="col-4">
-                        <div class="card">
-                            <img class="card-img-top" :src="image.url" alt="Card image cap"/>
-                            <div class="card-body">
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+            <input type="submit" value="Submit">
+        </form>
+
+        <router-link :to="`/users/${favorite.user_id}`">Back to profile</router-link>
+
+        <section id="portfolio">
+            <div class="container-fluid p-0">
+                <div class="row no-gutters">
+                    <div v-for="image in favorite.images" class="col-lg-4 col-sm-6">
+                        <a class="portfolio-box" :href="image.url">
+                            <img class="img-fluid plane-image" :src="image.url" alt="">
+                            <div class="portfolio-box-caption">
+                                <div class="project-category text-white-50">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                    <button v-on:click.stop.prevent="deletePhoto(image)">delete</button>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -53,6 +39,7 @@
                 <!--Display all articles-->
                 <div v-for="article in articles">
                     <a v-bind:href="article.url" target="_blank">{{article.title}}</a>
+                    <button v-on:click="setPostText(article)">Make a post about this article</button>
                 </div>
             </div>
         </section>
@@ -63,7 +50,7 @@
                 <form v-on:submit.prevent="submitPost()">
                     <div class="form-group">
                         <label>post:</label>
-                        <input type="text" class="form-control" v-model="postText">
+                        <textarea class="form-control new-post" v-model="postText"></textarea>
                     </div>
                     <input type="submit" class="btn btn-primary" value="Submit">
                 </form>
@@ -83,22 +70,23 @@
 </template>
 
 <style>
-    header.masthead-login {
-        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/1.jpg");
-    }
-
-    div.image-container {
-        height: 300px;
+    header.masthead.favorite {
+        height: 200px !important;
     }
 
     .plane-image {
         height: 300px;
-        object-fit: cover !important;
+        width: 100%;
+        object-fit: cover;
     }
 
     .card-img-top {
         height: 200px;
         object-fit: cover !important;
+    }
+
+    textarea.new-post {
+        min-height: 10em;
     }
 </style>
 
@@ -166,8 +154,12 @@
                 const response = await axios.post("/api/posts", params);
                 const newpost = response.data;
                 this.favorite.posts.push(newpost);
-                console.log("post added", newpost)
+                console.log("post added", newpost);
+                this.$router.push("/posts/" + newpost.id)
             },
+            setPostText: function (article) {
+                this.postText = article.title + "\n" + article.url + "\n\nYour text goes here..."
+            }
         }
     };
 

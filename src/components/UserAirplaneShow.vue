@@ -32,21 +32,30 @@
 
                                         <div>
                                             <div class="form-group">
-                                                <h4 class=" card-title">Add a Favorite</h4>
-                                                <div>
-                                                    <span>Select an airplane {{ selectedAirplaneId }}</span>
+                                                <div v-if="user.is_current_user">
+                                                    <h4 class=" card-title">Add a Favorite</h4>
+                                                    <div>
+                                                        <span>Select an airplane {{ selectedAirplaneId }}</span>
+                                                    </div>
+                                                    <select class="form-control" v-model="selectedAirplaneId">
+                                                        <option v-for="airplane in airplanes"
+                                                                v-if="!user.favorite_ids.includes(airplane.id)"
+                                                                v-bind:value="airplane.id">
+                                                            {{ airplane.model }}
+                                                        </option>
+                                                    </select>
                                                 </div>
-                                                <select class="form-control" v-model="selectedAirplaneId">
-                                                    <option v-for="airplane in airplanes"
-                                                            v-if="!user.favorite_ids.includes(airplane.id)"
-                                                            v-bind:value="airplane.id">
-                                                        {{ airplane.model }}
-                                                    </option>
-                                                </select>
+                                                <br>
+                                                <div>
+                                                    <button v-on:click="addFavorite()" type="submit"
+                                                            class="btn btn-primary">
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                                <br>
+                                                <router-link v-bind:to="`/users/${user.id}/edit`">Edit user
+                                                </router-link>
                                             </div>
-                                            <button v-on:click="addFavorite()" type="submit" class="btn btn-primary">
-                                                Submit
-                                            </button>
                                         </div>
                                     </div>
                                 </div>

@@ -9,7 +9,7 @@
                     </div>
                     <div class="">
                         <div class="card-body">
-                            <div class="card">
+                            <div class="card card-user">
                                 <div class="row">
                                     <div class="col col-sm-4 left">
                                         <div class="img animated fadeIn">
@@ -89,11 +89,12 @@
         background: #e6e6e6;
     }
 
-    .card {
+    .card card-user {
         border-radius: .25rem;
         border: none;
         width: 600px;
-        height: 300px
+        height: 300px;
+        margin-bottom: 3rem;
     }
 
     .card-body {

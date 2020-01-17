@@ -5,30 +5,20 @@
             <div class="container h-100">
                 <div class="row h-100 align-items-center justify-content-center text-center">
                     <div class="col-lg-10 align-self-end">
-                        <h1 class="text-uppercase text-white font-weight-bold">{{ message }}</h1>
+                        <h1 class="text-uppercase text-white font-weight-bold"></h1>
                         <hr class="divider my-4">
                         <div class="container">
-                            <h3>Edit User</h3>
                             <div class="container">
                                 <h2>Posts and Comments</h2>
                                 {{ post.text}}
                                 <!--delete the post-->
-                                <button v-on:click="deletePost(post)">X</button>
-                                <!--show the post comments ()-->
-                                <ul>
-                                    <li v-for="comment in post.comments">
-                                        {{comment.text}}
-                                        <!--delete the comment-->
-                                        <button v-on:click="deleteComment(comment)">X</button>
-                                    </li>
-                                </ul>
+                                <button v-on:click="deletePost(post)">delete a post</button>
                                 <!--add a comment-->
                                 <section>
                                     <div class="container">
                                         <h2>New Comment</h2>
                                         <form v-on:submit.prevent="submitComment()">
                                             <div class="form-group">
-                                                <label>comment:</label>
                                                 <input type="text" class="form-control" v-model="postComment">
                                             </div>
                                             <input type="submit" class="btn btn-primary" value="Submit">
@@ -37,6 +27,35 @@
                                 </section>
                                 <!--delete the post-->
                                 <a v-bind:href="`/favorites/${post.favorite_id}`">Back to posts</a>
+                            </div>
+
+
+                            <div class="container post-comments">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3>Comments</h3>
+                                    </div><!-- /col-md-12 -->
+                                </div><!-- /row -->
+                                <div class="row" v-for="comment in post.comments">
+                                    <div class="col-md-1">
+                                        <img class="img-thumbnail img-responsive user-photo"
+                                             src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                                    </div><!-- /col-md-1 -->
+                                    <div class="col-md-7">
+                                        <div class="card card-info">
+                                            <div class="card-header">
+                                                <strong>{{comment.name}}</strong>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul>
+                                                    {{comment.text}}
+                                                    <!--delete the comment-->
+                                                    <button v-on:click="deleteComment(comment)">X</button>
+                                                </ul>
+                                            </div><!-- /panel-body -->
+                                        </div><!-- /panel panel-default -->
+                                    </div><!-- /col-md-5 -->
+                                </div><!-- /row -->
                             </div>
                         </div>
                     </div>
@@ -48,6 +67,48 @@
         </header>
     </div>
 </template>
+
+<style>
+    .post-comments .img-thumbnail {
+        padding: 0px;
+    }
+
+    .post-comments .card {
+        position: relative;
+        height: 105px;
+        margin-bottom: 1em;
+    }
+
+    .post-comments .card .card-header:after,
+    .post-comments .card .card-header:before {
+        position: absolute;
+        top: 11px;
+        left: -16px;
+        right: 100%;
+        width: 0;
+        height: 0;
+        display: block;
+        content: " ";
+        border-color: transparent;
+        border-style: solid solid outset;
+        pointer-events: none;
+    }
+
+    .post-comments .card .card-header:after {
+        border-width: 7px;
+        border-right-color: #f7f7f7;
+        margin-top: 1px;
+        margin-left: 2px;
+    }
+
+    .post-comments .card .card-header:before {
+        border-right-color: #ddd;
+        border-width: 8px;
+    }
+
+
+</style>
+
 
 <script>
     import axios from "axios";
@@ -71,14 +132,14 @@
                 console.log(error.response);
             }
 
-            try {
-                const response = await axios.get("/api/comments/" + this.$route.params.id);
-                const comments = response.data;
-                this.comment = response.data;
-                console.log("comment", comments)
-            } catch (error) {
-                console.log(error.response);
-            }
+            // try {
+            //     const response = await axios.get("/api/comments/" + this.$route.params.id);
+            //     const comments = response.data;
+            //     this.comment = response.data;
+            //     console.log("comment", comments)
+            // } catch (error) {
+            //     console.log(error.response);
+            // }
         },
 
         methods: {
@@ -99,9 +160,8 @@
             deletePost: async function (post) {
                 const response = await axios.delete("/api/posts/" + post.id);
                 const postDeleted = response.data;
-                const index = this.favorite.posts.indexOf(post);
-                this.favorite.posts.splice(index, 1);
                 console.log("post deleted", postDeleted);
+                this.$router.push("/favorites/" + this.post.favorite_id);
             },
 
             deleteComment: async function (comment) {
@@ -114,7 +174,3 @@
         }
     }
 </script>
-
-<style>
-
-</style>
