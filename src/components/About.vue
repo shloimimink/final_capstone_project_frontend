@@ -1,28 +1,39 @@
 <template>
     <div class="about">
         <!-- About Section -->
-        <section class="page-section bg-primary" id="about">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8 text-center">
-                        <h2 class="text-white mt-0">Book a flight</h2>
-                        <hr class="divider light my-4">
-                        <p class="text-white-50 mb-4">Start Bootstrap has everything you need to get your new website up
-                            and
-                            running in no time! Choose one of our open source, free to download, and easy to use themes!
-                            No
-                            strings attached!</p>
-                        <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!--<section class="page-section bg-primary" id="about">-->
+        <!--<div class="container">-->
+        <!--<div class="row justify-content-center">-->
+        <!--<div class="col-lg-8 text-center">-->
+        <!--<h2 class="text-white mt-0">Book a Flight</h2>-->
+        <!--<hr class="divider light my-4">-->
+        <!--<p class="text-white-50 mb-4"></p>-->
+        <!--<a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</section>-->
         <div class="container">
+            <h2 class="text-white mt-0">Book a Flight</h2>
+
             <div data-skyscanner-widget="FlightSearchWidget" data-locale="en-US"></div>
 
         </div>
     </div>
 </template>
+
+<style>
+    div.about {
+        padding-top: 10rem;
+        padding-bottom: calc(10rem - 72px);
+        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/9.jpg");
+        background-position: center;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll;
+        background-size: cover !important;
+        height: 100vh
+    }
+</style>
 
 <script>
     export default {

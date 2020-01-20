@@ -1,7 +1,7 @@
 <template>
-    <div class="signup">
+    <div class="signup masthead-register">
         <!-- Masthead -->
-        <header class="masthead signup">
+        <header class="masthead signup masthead-register">
             <div class="container h-100">
                 <div class="row h-100 align-items-center justify-content-center text-center">
                     <div class="col-lg-10 align-self-end">
@@ -11,24 +11,24 @@
 
                         <div class="container">
                             <form v-on:submit.prevent="submit()">
-                                <h1>Signup</h1>
+                                <h1 class="text-primary">Signup</h1>
                                 <ul>
                                     <li class="text-danger" v-for="error in errors">{{ error }}</li>
                                 </ul>
                                 <div class="form-group">
-                                    <label>Name:</label>
+                                    <label class="text-primary">Name:</label>
                                     <input type="text" class="form-control" v-model="name">
                                 </div>
                                 <div class="form-group">
-                                    <label>Email:</label>
+                                    <label class="text-primary">Email:</label>
                                     <input type="email" class="form-control" v-model="email">
                                 </div>
                                 <div class="form-group">
-                                    <label>Password:</label>
+                                    <label class="text-primary">Password:</label>
                                     <input type="password" class="form-control" v-model="password">
                                 </div>
                                 <div class="form-group">
-                                    <label>Password confirmation:</label>
+                                    <label class="text-primary">Password confirmation:</label>
                                     <input type="password" class="form-control" v-model="password_confirmation">
                                 </div>
                                 <input type="submit" class="btn btn-primary" value="Submit">
@@ -46,8 +46,14 @@
 </template>
 
 <style>
-    header.masthead-login {
-        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/1.jpg");
+    header.masthead-register {
+        padding-top: 10rem;
+        padding-bottom: calc(10rem - 72px);
+        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/10.jpg");
+        background-position: center;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll;
+        background-size: cover !important;
     }
 </style>
 

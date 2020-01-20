@@ -7,33 +7,36 @@
                     <div class="col-lg-10 align-self-end">
                         <h1 class="text-uppercase text-white font-weight-bold"></h1>
                         <hr class="divider my-4">
-                        <div class="container">
+
+
+                        <div class="position"><a v-bind:href="`/favorites/${post.favorite_id}`">Back to posts</a></div>
+                        <br>
+                        <div class="jumbotron jumbotron-fluid">
                             <div class="container">
-                                <h2>Posts and Comments</h2>
-                                {{ post.text}}
-                                <!--delete the post-->
-                                <button v-on:click="deletePost(post)">delete a post</button>
-                                <!--add a comment-->
-                                <section>
-                                    <div class="container">
-                                        <h2>New Comment</h2>
-                                        <form v-on:submit.prevent="submitComment()">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" v-model="postComment">
-                                            </div>
-                                            <input type="submit" class="btn btn-primary" value="Submit">
-                                        </form>
-                                    </div>
-                                </section>
-                                <!--delete the post-->
-                                <a v-bind:href="`/favorites/${post.favorite_id}`">Back to posts</a>
+                                <h1 class="display-4">Posts and Comments</h1>
+                                <p class="lead">{{ post.text}}
+                                    <button v-if="post.is_current_user" class="btn btn-danger"
+                                            v-on:click="deletePost(post)">delete a post
+                                    </button>
+                                </p>
                             </div>
+                        </div>
+
+                        <form v-on:submit.prevent="submitComment()" class="form-inline">
+                            <div class="form-group mb-2 mr-2 w-50">
+                                <input type="text" class="form-control w-100" placeholder="Add a comment..."
+                                       v-model="postComment">
+                            </div>
+                            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                        </form>
 
 
+                        <div class="container">
                             <div class="container post-comments">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h3>Comments</h3>
+                                        <br>
+                                        <br>
                                     </div><!-- /col-md-12 -->
                                 </div><!-- /row -->
                                 <div class="row" v-for="comment in post.comments">
@@ -50,7 +53,10 @@
                                                 <ul>
                                                     {{comment.text}}
                                                     <!--delete the comment-->
-                                                    <button v-on:click="deleteComment(comment)">X</button>
+                                                    <button v-if="comment.is_current_user" class="btn btn-danger"
+                                                            v-on:click="deleteComment(comment)">
+                                                        X
+                                                    </button>
                                                 </ul>
                                             </div><!-- /panel-body -->
                                         </div><!-- /panel panel-default -->
@@ -106,7 +112,9 @@
         border-width: 8px;
     }
 
-
+    .position {
+        padding-right: 800px;
+    }
 </style>
 
 

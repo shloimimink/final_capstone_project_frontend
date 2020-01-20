@@ -8,26 +8,27 @@
                         <h1 class="text-uppercase text-white font-weight-bold">{{ message }}</h1>
                         <hr class="divider my-4">
                         <div class="container">
-                            <h3>Edit User</h3>
+                            <h3 class="text-primary">Edit User</h3>
                             <form v-on:submit.prevent="updateUser(user)">
                                 <ul>
                                     <li v-for="error in errors">{{error}}</li>
                                 </ul>
-                                Name:
+                                <div class="text-primary">Name:</div>
                                 <input type="text" class="form-control" v-model="user.name">
-                                Phone Number:
+                                <div class="text-primary">Phone Number:</div>
                                 <input type="text" class="form-control" v-model="user.phone">
-                                Profile picture:
+                                <div class="text-primary">Profile picture:</div>
                                 <input type="text" class="form-control" v-model="user.profile_picture">
-                                Location:
+                                <div class="text-primary">Location:</div>
                                 <input type="text" class="form-control" v-model="user.location">
-                                Seat Preference:
+                                <div class="text-primary">Seat Preference:</div>
                                 <input type="text" class="form-control" v-model="user.seat_preference">
-                                Class Preference:
+                                <div class="text-primary">Class Preference:</div>
                                 <input type="text" class="form-control" v-model="user.class_preference">
-                                airport Preference:
+                                <div class="text-primary">airport Preference:</div>
                                 <input type="text" class="form-control" v-model="user.airport_preference">
-                                <input type="submit" value="Update"/>
+                                <br>
+                                <input class="btn btn-primary" type="submit" value="Update"/>
                             </form>
                         </div>
                     </div>
@@ -41,9 +42,9 @@
 </template>
 
 <style>
-    header.masthead-login {
-        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/1.jpg");
-    }
+    /*header.masthead-login {*/
+    /*background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/1.jpg");*/
+    /*}*/
 </style>
 
 
@@ -75,7 +76,7 @@
                     seat_preference: user.seat_preference,
                     class_preference: user.class_preference,
                     airport_preference: user.airport_preference,
-                    //airline_Preference: user.airline_Preference
+                    airline_id: user.airline_id
                 };
 
                 try {

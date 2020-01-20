@@ -1,15 +1,27 @@
 <template>
-    <div class="signup">
-        <button v-on:click="deletePhoto(image)">Delete image</button>
-        <form v-on:submit.prevent="submit()">
-            <h2>Create a new image:</h2>
-            <div>
-                Image: <input type="file" v-on:change="setFile($event)" ref="fileInput">
+    <div class="airplaneUser masthead-airplaneUser">
+        <br>
+        <br>
+        <form v-if="favorite.is_current_user" v-on:submit.prevent="submit()">
+            <div class="container">
+                <br>
+                <br>
+                <h2 class="text-primary">Add a new image</h2>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="input-image-file" v-on:change="setFile($event)"
+                               ref="fileInput">
+                        <label class="custom-file-label" for="input-image-file">{{ currentFilename }}</label>
+                    </div>
+                    <div class="input-group-append">
+                        <input class="btn-primary" type="submit" value="Submit">
+                    </div>
+                </div>
             </div>
-            <input type="submit" value="Submit">
+
         </form>
 
-        <router-link :to="`/users/${favorite.user_id}`">Back to profile</router-link>
+        <router-link :to="`/users-profile/${favorite.user_id}`">Back to profile</router-link>
 
         <section id="portfolio">
             <div class="container-fluid p-0">
@@ -19,11 +31,12 @@
                             <img class="img-fluid plane-image" :src="image.url" alt="">
                             <div class="portfolio-box-caption">
                                 <div class="project-category text-white-50">
-                                    Category
                                 </div>
                                 <div class="project-name">
-                                    Project Name
-                                    <button v-on:click.stop.prevent="deletePhoto(image)">delete</button>
+                                    Image
+                                    <button v-if="favorite.is_current_user" class="btn btn-danger"
+                                            v-on:click.stop.prevent="deletePhoto(image)">X
+                                    </button>
                                 </div>
                             </div>
                         </a>
@@ -31,25 +44,37 @@
                 </div>
             </div>
         </section>
-
-
+        <br>
+        <br>
+        <br>
         <section>
             <div class="container">
                 <h2>Articles ({{articles.length}} found)</h2>
                 <!--Display all articles-->
-                <div v-for="article in articles">
-                    <a v-bind:href="article.url" target="_blank">{{article.title}}</a>
-                    <button v-on:click="setPostText(article)">Make a post about this article</button>
-                </div>
+                <ul>
+                    <li v-for="article in articles" class="mb-2">
+                        <div class="row">
+                            <div class="col-8">
+                                <a class="text-dark" v-bind:href="article.url"
+                                   target="_blank">{{article.title}}</a>
+                            </div>
+                            <div class="col-4">
+                                <button class="btn btn-primary" v-on:click="setPostText(article)">Make a post about this
+                                    article
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </section>
-
+        <br>
+        <br>
         <section>
             <div class="container">
-                <h2>New post</h2>
+                <h2 class="text-primary">New post</h2>
                 <form v-on:submit.prevent="submitPost()">
                     <div class="form-group">
-                        <label>post:</label>
                         <textarea class="form-control new-post" v-model="postText"></textarea>
                     </div>
                     <input type="submit" class="btn btn-primary" value="Submit">
@@ -59,7 +84,7 @@
 
         <section>
             <div class="container">
-                <h2>Posts</h2>
+                <h2 class="text-primary">Posts</h2>
                 <div v-for="post in favorite.posts">
                     <!--show the post text-->
                     <a v-bind:href="`/posts/${post.id}`">{{ post.text }}</a>
@@ -88,6 +113,17 @@
     textarea.new-post {
         min-height: 10em;
     }
+
+    .masthead-airplaneUser {
+        padding-top: 10rem;
+        padding-bottom: calc(10rem - 72px);
+        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/11.jpg");
+        background-position: center;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll;
+        background-size: cover !important;
+        height: 100vh
+    }
 </style>
 
 <script>
@@ -99,7 +135,8 @@
                 message: "Hello",
                 favorite: {airplane: {}},
                 articles: [],
-                postText: ""
+                postText: "",
+                currentFilename: "Choose file"
             };
         },
         created: async function () {
@@ -115,8 +152,10 @@
         },
         methods: {
             setFile: function (event) {
+                console.log('setFile', event);
                 if (event.target.files.length > 0) {
                     this.image = event.target.files[0];
+                    this.currentFilename = event.target.files[0].name;
                 }
             },
 
@@ -129,6 +168,7 @@
                     const response = await axios.post("/api/images", formData);
                     const postImage = response.data;
                     this.$refs.fileInput.value = "";
+                    this.currentFilename = "Choose file";
                     console.log("added Image", postImage);
                     console.log("favorite images", this.favorite.images);
                     this.favorite.images.push(postImage);

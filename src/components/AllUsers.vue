@@ -1,10 +1,10 @@
 <template>
     <div class="signup">
-        <header class="masthead signup">
+        <header class="masthead signup masthead-signup">
             <div class="container h-100">
                 <div class="row h-100 align-items-center justify-content-center text-center">
                     <div class="col-lg-10 align-self-end">
-                        <h1 class="text-uppercase text-white font-weight-bold">{{ message }}</h1>
+                        <h1 class="text-uppercase text-primary font-weight-bold">{{ message }}</h1>
                         <hr class="divider my-4">
                     </div>
                     <div class="">
@@ -17,7 +17,7 @@
                                             <img class="img-logo" v-bind:src="user.profile_picture" alt="">
                                         </div>
                                         <h4>{{user.name}}</h4>
-                                        <p>Role: Admin</p>
+                                        <p>Role: {{ user.name === "Shloimi Minkowicz" ? "admin" : "user"}}</p>
                                         <button v-on:click="showMoreInfo(user)">More Info</button>
                                     </div>
                                     <div class="col col-sm-8 right">
@@ -28,8 +28,8 @@
                                             <h4>Phone:</h4>
                                             <p>{{user.phone}}</p>
 
-                                            <h4>Website:</h4>
-                                            <p>www.website.com</p>
+                                            <h4>Location:</h4>
+                                            <p>{{user.location}}</p>
 
                                             <div class="action-buttons">
                                                 <button class="edit"><i class="fa fa-pencil"></i></button>
@@ -52,8 +52,14 @@
         background-color: #6a5f5e;
     }
 
-    header.masthead-login {
-        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/1.jpg");
+    header.masthead-signup {
+        padding-top: 10rem;
+        padding-bottom: calc(10rem - 72px);
+        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/8.jpg");
+        background-position: center;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll;
+        background-size: cover !important;
     }
 
     .img-logo {
