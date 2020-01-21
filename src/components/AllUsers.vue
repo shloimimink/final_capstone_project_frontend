@@ -30,12 +30,6 @@
 
                                             <h4>Location:</h4>
                                             <p>{{user.location}}</p>
-
-                                            <div class="action-buttons">
-                                                <button class="edit"><i class="fa fa-pencil"></i></button>
-                                                <button v-on:click="deleteUser(user)" class="delete"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

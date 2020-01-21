@@ -1,7 +1,7 @@
 <template>
     <div class="signup">
         <!-- Masthead -->
-        <header class="masthead signup">
+        <header class="editUser masthead-editUser">
             <div class="container h-100">
                 <div class="row h-100 align-items-center justify-content-center text-center">
                     <div class="col-lg-10 align-self-end">
@@ -42,9 +42,17 @@
 </template>
 
 <style>
-    /*header.masthead-login {*/
-    /*background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/1.jpg");*/
-    /*}*/
+    .masthead-editUser {
+        padding-top: 2rem;
+        padding-bottom: calc(10rem - 72px);
+        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/17.jpg");
+        background-position: center;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll;
+        background-size: cover !important;
+        height: 100vh
+    }
+
 </style>
 
 

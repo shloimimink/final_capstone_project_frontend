@@ -130,7 +130,7 @@
     .masthead-profileShow {
         padding-top: 2rem;
         padding-bottom: calc(10rem - 72px);
-        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/12.jpg");
+        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/16.jpg");
         background-position: center;
         background-repeat: no-repeat !important;
         background-attachment: scroll;
@@ -145,7 +145,7 @@
 
     .clear-card {
         /*opacity: 0.5;*/
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(255, 255, 255, 0.4);
     }
 
     .container.bg-transparent {
