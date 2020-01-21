@@ -50,7 +50,7 @@
     header.masthead-signup {
         padding-top: 10rem;
         padding-bottom: calc(10rem - 72px);
-        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/8.jpg");
+        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../../public/img/portfolio/fullsize/8.jpg");
         background-position: center;
         background-repeat: no-repeat !important;
         background-attachment: scroll;

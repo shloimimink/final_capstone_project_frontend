@@ -15,11 +15,11 @@
                                     <div class="card-block p-3">
                                         <h5 class=" card-title">Seat Preference</h5>
                                         <img v-if="user.seat_preference === 'aisle'"
-                                             src="../../public/img/seat-aisle.jpg" alt="" width="50">
+                                             src="../../../public/img/seat-aisle.jpg" alt="" width="50">
                                         <img v-if="user.seat_preference === 'middle'"
-                                             src="../../public/img/seat-middle.jpg" alt="" width="50">
+                                             src="../../../public/img/seat-middle.jpg" alt="" width="50">
                                         <img v-if="user.seat_preference === 'window'"
-                                             src="../../public/img/seat-window.jpg" alt="" width="50">
+                                             src="../../../public/img/seat-window.jpg" alt="" width="50">
 
                                         <h6 class="card-subtitle mb-2 text-muted">{{user.seat_preference}}</h6>
                                         <h5 class=" card-title">Class Preference</h5>
@@ -130,7 +130,7 @@
     .masthead-profileShow {
         padding-top: 2rem;
         padding-bottom: calc(10rem - 72px);
-        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/16.jpg");
+        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../../public/img/portfolio/fullsize/16.jpg");
         background-position: center;
         background-repeat: no-repeat !important;
         background-attachment: scroll;

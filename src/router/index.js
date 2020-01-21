@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../components/Home.vue'
-import Register from "../components/Register.vue";
-import Login from "../components/Login.vue";
-import Logout from "../components/Logout.vue";
-import Airlines from "../components/Airlines.vue";
-import EditUser from "../components/EditUser.vue";
-import AllUsers from "../components/AllUsers.vue";
-import UserProfileShow from "../components/UserProfileShow.vue";
-import AirplaneUser from "../components/AirplaneUser.vue";
-import ShowPosts from "../components/ShowPosts.vue";
-import UserAirplaneShow from "../components/UserAirplaneShow.vue";
+import Register from "../components/auth/Register.vue";
+import Login from "../components/auth/Login.vue";
+import Logout from "../components/auth/Logout.vue";
+import Airlines from "../components/ProfileFavorites/Airlines.vue";
+import EditUser from "../components/users/EditUser.vue";
+import AllUsers from "../components/users/AllUsers.vue";
+import UserProfileShow from "../components/ProfileFavorites/UserProfileShow.vue";
+import AirplaneUser from "../components/users/AirplaneUser.vue";
+import ShowPosts from "../components/ProfileFavorites/ShowPosts.vue";
+import UserAirplaneShow from "../components/ProfileFavorites/UserAirplaneShow.vue";
 
 
 Vue.use(VueRouter);
