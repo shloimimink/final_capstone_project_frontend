@@ -1,7 +1,6 @@
 <template>
     <div class="airplaneUser masthead-airplaneUser">
         <br>
-        <br>
         <form v-if="favorite.is_current_user" v-on:submit.prevent="submit()">
             <div class="container">
                 <br>
@@ -117,7 +116,7 @@
     .masthead-airplaneUser {
         padding-top: 10rem;
         padding-bottom: calc(10rem - 72px);
-        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/11.jpg");
+        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/14.jpg");
         background-position: center;
         background-repeat: no-repeat !important;
         background-attachment: scroll;

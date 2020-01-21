@@ -33,7 +33,8 @@
 
                                             <div class="action-buttons">
                                                 <button class="edit"><i class="fa fa-pencil"></i></button>
-                                                <button class="delete"><i class="fa fa-trash"></i></button>
+                                                <button v-on:click="deleteUser(user)" class="delete"><i
+                                                        class="fa fa-trash"></i></button>
                                             </div>
                                         </div>
                                     </div>
@@ -241,6 +242,20 @@
 
             showMoreInfo: function (user) {
                 this.$router.push("/users-airplane/" + user.id)
+            },
+
+            // delete a user
+            deleteUser: async function (user) {
+
+                try {
+                    const response = await axios.delete("/api/users/" + user.id);
+                    const index = this.user.indexOf(favorite);
+                    this.user.splice(index, 1);
+                    console.log("user deleted", response)
+                } catch (error) {
+                    console.log(error.response)
+                }
+
             }
         }
 

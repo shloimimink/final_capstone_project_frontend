@@ -3,7 +3,7 @@
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container">
-                <img src="./assets/logo.png" alt="./assets/logo.png" width="50" class="mr-3"> <a
+                <img src="./assets/logo.png" alt="./assets/logo.png" width="65" class="mr-3"> <a
                     class="navbar-brand js-scroll-trigger"
                     href="#page-top">The
                 Airplane
@@ -20,7 +20,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <router-link class="nav-link js-scroll-trigger" to="/about">Book a Flight</router-link>
+                            <router-link class="nav-link js-scroll-trigger" to="/about" v-if="jwt"> Book a Flight
+                            </router-link>
                         </li>
 
                         <li class="nav-item">

@@ -11,9 +11,16 @@
                         <section class="row d-flex justify-content-center">
 
                             <article class="col-md-4">
-                                <div class="card h-100">
+                                <div class="card h-100 clear-card">
                                     <div class="card-block p-3">
                                         <h5 class=" card-title">Seat Preference</h5>
+                                        <img v-if="user.seat_preference === 'aisle'"
+                                             src="../../public/img/seat-aisle.jpg" alt="" width="50">
+                                        <img v-if="user.seat_preference === 'middle'"
+                                             src="../../public/img/seat-middle.jpg" alt="" width="50">
+                                        <img v-if="user.seat_preference === 'window'"
+                                             src="../../public/img/seat-window.jpg" alt="" width="50">
+
                                         <h6 class="card-subtitle mb-2 text-muted">{{user.seat_preference}}</h6>
                                         <h5 class=" card-title">Class Preference</h5>
                                         <h6 class="card-subtitle mb-2 text-muted"> {{user.class_preference}}</h6>
@@ -22,19 +29,19 @@
                                         <h5 class=" card-title">Airline Preference</h5>
                                         <h6 class="card-subtitle mb-2 text-muted">{{user.airline_name}}</h6>
                                         <br>
-                                        <div>
-                                            <h4 class=" card-title">Add a Favorite Airline</h4>
+                                        <div v-if="user.is_current_user">
+                                            <h4 class=" card-title">Add a Favorite
+                                                Airline</h4>
                                             <div>
                                                 <span>Select an airline {{ selectedAirlineId }}</span>
                                             </div>
-                                            <select class="form-control" v-model="selectedAirlineId">
+                                            <select class="form-control"
+                                                    v-model="selectedAirlineId">
                                                 <option v-for="airline in airlines" v-bind:value="airline.id">
                                                     {{ airline.name }}
                                                 </option>
                                             </select>
-                                        </div>
-                                        <br>
-                                        <div>
+                                            <br>
                                             <button v-on:click="addFavoriteAirline()" type="submit"
                                                     class="btn btn-primary">
                                                 Submit
@@ -46,11 +53,32 @@
 
 
                             <article class="col-md-4">
-                                <div class="card h-100">
+                                <div class="card h-100 clear-card">
+                                    <div class="card-block p-3">
+                                        <h4 class=" card-title">Favorites</h4>
+                                        <ul class="list-unstyled">
+                                            <div v-for="favorite in user.favorites">
+                                                <div class="airplane-text">Airplane: {{ favorite.airplane_model}}
+                                                    <button v-if="user.is_current_user" type="button"
+                                                            class="btn btn-danger"
+                                                            v-on:click="deleteFavorite(favorite)">X
+                                                    </button>
+                                                </div>
+                                                <router-link v-bind:to="`/favorites/${favorite.id}`">More Info
+                                                </router-link>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="col-md-4">
+                                <div class="card h-100 text-center clear-card">
+
                                     <div class="card-block p-3 text-center">
                                         <div>
-                                            <div class="form-group">
-                                                <div v-if="user.is_current_user">
+                                            <div v-if="user.is_current_user" class="form-group">
+                                                <div>
                                                     <h4 class=" card-title">Add a Favorite</h4>
                                                     <div>
                                                         <span>Select an airplane {{ selectedAirplaneId }}</span>
@@ -76,26 +104,6 @@
                                                 </router-link>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="col-md-4">
-                                <div class="card h-100 text-center">
-                                    <div class="card-block p-3">
-                                        <h4 class=" card-title">Favorites</h4>
-                                        <ul class="list-unstyled">
-                                            <div v-for="favorite in user.favorites">
-                                                <div class="airplane-text">Airplane: {{ favorite.airplane_model}}
-                                                    <button v-if="user.is_current_user" type="button"
-                                                            class="btn btn-danger"
-                                                            v-on:click="deleteFavorite(favorite)">X
-                                                    </button>
-                                                </div>
-                                                <router-link v-bind:to="`/favorites/${favorite.id}`">More Info
-                                                </router-link>
-                                            </div>
-                                        </ul>
                                     </div>
                                 </div>
                             </article>
@@ -135,11 +143,17 @@
         width: inherit;
     }
 
+    .clear-card {
+        /*opacity: 0.5;*/
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+
     .container.bg-transparent {
         border: solid 4px darkgrey;
         border-radius: 10px;
         width: 100vw;
     }
+
 
 </style>
 
