@@ -1,7 +1,7 @@
 <template>
     <div class="about">
         <div class="container">
-            <h2 class="text-white mt-0">Book a Flight</h2>
+            <h2 class="text-white-75 mt-0">Book a Flight</h2>
 
             <div data-skyscanner-widget="FlightSearchWidget" data-locale="en-US"></div>
 
@@ -15,7 +15,7 @@
     div.about {
         padding-top: 10rem;
         padding-bottom: calc(10rem - 72px);
-        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/9.jpg");
+        background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../../public/img/portfolio/fullsize/18.jpg");
         background-position: center;
         background-repeat: no-repeat !important;
         background-attachment: scroll;

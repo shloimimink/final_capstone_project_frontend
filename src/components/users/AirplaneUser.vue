@@ -138,6 +138,23 @@
                 currentFilename: "Choose file"
             };
         },
+        mounted: function () {
+            // Magnific popup calls
+            $('#portfolio').magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                tLoading: 'Loading image #%curr%...',
+                mainClass: 'mfp-img-mobile',
+                gallery: {
+                    enabled: true,
+                    navigateByImgClick: true,
+                    preload: [0, 1]
+                },
+                image: {
+                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
+                }
+            });
+        },
         created: async function () {
             const response = await axios.get("/api/airplane_users/" + this.$route.params.id);
             const favoriteAirplane = response.data;
